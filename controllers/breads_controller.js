@@ -59,13 +59,20 @@ breads.put('/:arrayIndex', (req, res) => {
   } else {
     req.body.hasGluten = false
   }
-  Bread[req.params.arrayIndex] = req.body
-  res.redirect(`/breads/${req.params.arrayIndex}`)
+  // Bread[req.params.arrayIndex] = req.body
+  Bread.findByIdAndUpdate(req.params.arrayIndex, req.body,{new:true})
+  .then(updatedBread =>{
+    console.log(updatedBread)
+    res.redirect(`/breads/${req.params.arrayIndex}`)
+  })
 })
+
 // DELETE
 breads.delete('/:indexArray', (req, res) => {
-  Bread.splice(req.params.indexArray, 1)
+  Bread.findByIdAndDelete(req.params.indexArray)
+  .then(deletedBread => {
   res.status(303).redirect('/breads')
+  })
 })
   module.exports = breads
 

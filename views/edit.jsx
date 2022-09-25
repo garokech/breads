@@ -36,7 +36,7 @@ function Edit ({bread, index}) {
     )
 }
 
-<form action={`/breads/${index}?_method=PUT`} method="POST"></form>
+<form action={`/breads/${breads.id}?_method=PUT`} method="POST"></form>
 
 
 module.exports = Edit
