@@ -8,15 +8,16 @@ const breadSchema = new Schema({
   hasGluten: Boolean,
   image: { type: String, default: "http://placehold.it/500x500.png"},
   baker:{
-    type: Schema.Types.ObjectId,
-    enum:'Baker'
+    type: Schema.Types.ObjectID,
+    ref:'Baker'
   }
 })
-
-//Helper Methods
+// helper methods 
 breadSchema.methods.getBakedBy = function(){
-  return `${this.name} was baked with love by ${this.baker}`
+  return `${this.name} was baked with love by ${this.baker.name}, who has been with us since ${this.baker.startDate.getFullYear()}`
 }
+
+
 
 
 const Bread = mongoose.model('Bread', breadSchema)
