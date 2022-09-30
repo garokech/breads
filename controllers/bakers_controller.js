@@ -12,9 +12,14 @@ baker.get('/data/seed', (req, res) => {
 // Index: 
 baker.get('/', (req, res) => {
     Baker.find()
-        .populate('breads')
+        .populate({
+            path: "breads",
+            options:{limit: 2}
+        })
         .then(foundBakers => {
-            res.send(foundBakers)
+            res.send('bakerShow',{
+                baker: foundBaker
+            })
         })
 })               
      
